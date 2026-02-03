@@ -26,6 +26,8 @@ export const commands: Record<string, CommandFn> = {
         "  cat <file>         print file contents",
         "  open <file>        open .site or .pdf in new tab",
         "  clear              clear the terminal",
+        "  echo               print text to terminal",
+        "  banner             show banner message"
     ]);
   },
 
@@ -125,5 +127,19 @@ export const commands: Record<string, CommandFn> = {
 
   clear(args, ctx) {
     ctx.setHistory(() => []);
+  },
+
+  echo(args, ctx) {
+    ctx.setHistory((prev) => [...prev, args.join(" ")]);
+    return;
+  },
+
+  banner(args, ctx) {
+    ctx.setHistory((prev) => [...prev,
+        "Welcome to akhilmohammad.com",
+        "Quick resume access? Type 'open resume.pdf'",
+        "Type 'help' for list of available commands",
+    ]);
+    return;
   },
 };
